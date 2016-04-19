@@ -1,11 +1,11 @@
 Name:           openh264
 Version:        1.5.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Open Source H.264 Codec
 License:        BSD
 URL:            http://www.openh264.org/
 
-Source0:        https://github.com/cisco/%{name}/archive/v%{version}tar.gz#/%{name}-%{version}.tar.gz
+Source0:        https://github.com/cisco/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires:  nasm
 
@@ -60,5 +60,8 @@ find %{buildroot} -name "*.a" -delete
 %{_libdir}/pkgconfig/*.pc
 
 %changelog
+* Tue Apr 19 2016 Simone Caronni <negativo17@gmail.com> - 1.5.0-2
+- Fix source URL.
+
 * Fri Nov 20 2015 Simone Caronni <negativo17@gmail.com> - 1.5.0-1
 - First build.
