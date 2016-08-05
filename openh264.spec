@@ -56,7 +56,7 @@ The mozilla-openh264 package contains a H.264 codec plugin for Mozilla browsers.
 
 # Extract gmp-api archive
 tar -xf %{S:1}
-mv gmp-api-%{commit0} gmp-api
+mv gmp-api-%{commit1} gmp-api
 
 sed -i \
     -e 's@PREFIX=/usr/local@PREFIX=%{_prefix}@g' \
