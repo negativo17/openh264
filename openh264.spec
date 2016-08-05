@@ -1,6 +1,7 @@
 Name:           openh264
-Version:        1.5.0
-Release:        2%{?dist}
+Version:        1.6.0
+Release:        1%{?dist}
+Epoch:          1
 Summary:        Open Source H.264 Codec
 License:        BSD
 URL:            http://www.openh264.org/
@@ -15,6 +16,9 @@ suitable for use in real time applications such as WebRTC.
 
 %package        libs
 Summary:        H.264 codec %{name} libraries
+Obsoletes:      %{name} < %{?epoch}:%{version}-%{release}
+Provides:       %{name} = %{?epoch}:%{version}-%{release}
+Provides:       %{name}%{?_isa} = %{?epoch}:%{version}-%{release}
 
 %description    libs
 The %{name}-devel package contains libraries and header files for developing
@@ -60,6 +64,11 @@ find %{buildroot} -name "*.a" -delete
 %{_libdir}/pkgconfig/*.pc
 
 %changelog
+* Fri Aug 05 2016 Simone Caronni <negativo17@gmail.com> - 1.6.0-1
+- Update to 1.6.0.
+- Obsoletes main package from the OpenH264 repository:
+  https://fedoraproject.org/wiki/OpenH264
+
 * Tue Apr 19 2016 Simone Caronni <negativo17@gmail.com> - 1.5.0-2
 - Fix source URL.
 
