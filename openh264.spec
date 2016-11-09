@@ -1,22 +1,17 @@
-# Latest 1.5 from v1.5.3-Firefox39 branch. 1.6 compatible with FFMpeg only from
-# release 3.2.
-%global commit0 2706e36bf0a8b7c539c803ed877148c005ffca59
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 # Latest commit on the Firefox branch as defined in the Makefile:
 # https://github.com/mozilla/gmp-api/tree/Firefox39
 %global commit1 c5f1d0f3213178818cbfb3e16f31d07328980560
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
 Name:           openh264
-Version:        1.5.3
+Version:        1.6.0
 Release:        1%{?dist}
 Epoch:          1
 Summary:        Open Source H.264 Codec
 License:        BSD
 URL:            http://www.openh264.org/
 
-Source0:        https://github.com/cisco/openh264/archive/%{commit0}/openh264-%{shortcommit0}.tar.gz
+Source0:        https://github.com/cisco/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        https://github.com/mozilla/gmp-api/archive/%{commit1}/gmp-api-%{shortcommit1}.tar.gz
 
 BuildRequires:  nasm
@@ -52,7 +47,7 @@ Requires:       mozilla-filesystem%{?_isa}
 The mozilla-openh264 package contains a H.264 codec plugin for Mozilla browsers.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%setup -qn %{name}-%{version}
 
 # Extract gmp-api archive
 tar -xf %{S:1}
@@ -113,6 +108,9 @@ EOF
 %{_libdir}/mozilla/plugins/gmp-gmpopenh264/
 
 %changelog
+* Wed Nov 09 2016 Simone Caronni <negativo17@gmail.com> - 1:1.6.0-1
+- Update to 1.6.0 official release.
+
 * Fri Aug 05 2016 Simone Caronni <negativo17@gmail.com> - 1:1.5.3-1
 - Update to 1.5.3 branch.
 - Obsoletes main package from the OpenH264 repository (prep for 1.6):
