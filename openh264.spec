@@ -5,7 +5,7 @@
 
 Name:           openh264
 Version:        1.6.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Epoch:          1
 Summary:        Open Source H.264 Codec
 License:        BSD
@@ -76,6 +76,9 @@ mkdir -p %{buildroot}%{_libdir}/firefox/defaults/pref
 cat > %{buildroot}%{_libdir}/firefox/defaults/pref/gmpopenh264.js << EOF
 pref("media.gmp-gmpopenh264.autoupdate", false);
 pref("media.gmp-gmpopenh264.version", "system-installed");
+pref("media.gmp-gmpopenh264.enabled", true);
+pref("media.gmp-gmpopenh264.provider.enabled", true);
+pref("media.peerconnection.video.h264_enabled", true);
 EOF
 
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d
@@ -108,6 +111,9 @@ EOF
 %{_libdir}/mozilla/plugins/gmp-gmpopenh264/
 
 %changelog
+* Fri Nov 25 2016 Simone Caronni <negativo17@gmail.com> - 1:1.6.0-2
+- Automatically enable the OpenH264 plugin.
+
 * Wed Nov 09 2016 Simone Caronni <negativo17@gmail.com> - 1:1.6.0-1
 - Update to 1.6.0 official release.
 
