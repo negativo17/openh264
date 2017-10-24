@@ -4,8 +4,8 @@
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
 Name:           openh264
-Version:        1.6.0
-Release:        2%{?dist}
+Version:        1.7.0
+Release:        1%{?dist}
 Epoch:          1
 Summary:        Open Source H.264 Codec
 License:        BSD
@@ -111,6 +111,9 @@ EOF
 %{_libdir}/mozilla/plugins/gmp-gmpopenh264/
 
 %changelog
+* Tue Oct 24 2017 Simone Caronni <negativo17@gmail.com> - 1:1.7.0-1
+- Update to version 1.7.0.
+
 * Fri Nov 25 2016 Simone Caronni <negativo17@gmail.com> - 1:1.6.0-2
 - Automatically enable the OpenH264 plugin.
 
