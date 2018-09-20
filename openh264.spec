@@ -5,7 +5,7 @@
 
 Name:           openh264
 Version:        1.7.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Epoch:          1
 Summary:        Open Source H.264 Codec
 License:        BSD
@@ -14,6 +14,7 @@ URL:            http://www.openh264.org/
 Source0:        https://github.com/cisco/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        https://github.com/mozilla/gmp-api/archive/%{commit1}/gmp-api-%{shortcommit1}.tar.gz
 
+BuildRequires:  gcc
 BuildRequires:  nasm
 
 %description
@@ -92,7 +93,6 @@ EOF
 %postun libs -p /sbin/ldconfig
 
 %files libs
-%{!?_licensedir:%global license %%doc}
 %license LICENSE
 %doc README.md CONTRIBUTORS
 %{_libdir}/*.so.*
@@ -111,6 +111,9 @@ EOF
 %{_libdir}/mozilla/plugins/gmp-gmpopenh264/
 
 %changelog
+* Thu Sep 20 2018 Simone Caronni <negativo17@gmail.com> - 1:1.7.0-2
+- Add GCC build requirement.
+
 * Tue Oct 24 2017 Simone Caronni <negativo17@gmail.com> - 1:1.7.0-1
 - Update to version 1.7.0.
 
