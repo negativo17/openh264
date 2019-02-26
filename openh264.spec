@@ -14,7 +14,7 @@ URL:            http://www.openh264.org/
 Source0:        https://github.com/cisco/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        https://github.com/mozilla/gmp-api/archive/%{commit1}/gmp-api-%{shortcommit1}.tar.gz
 
-BuildRequires:  gcc
+BuildRequires:  gcc-c++
 BuildRequires:  nasm
 
 %description
