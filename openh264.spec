@@ -4,8 +4,8 @@
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
 Name:           openh264
-Version:        1.7.0
-Release:        2%{?dist}
+Version:        1.8.0
+Release:        1%{?dist}
 Epoch:          1
 Summary:        Open Source H.264 Codec
 License:        BSD
@@ -21,28 +21,28 @@ BuildRequires:  nasm
 OpenH264 is a codec library which supports H.264 encoding and decoding. It is
 suitable for use in real time applications such as WebRTC.
 
-%package        libs
-Summary:        H.264 codec %{name} libraries
-Obsoletes:      %{name} < %{?epoch}:%{version}-%{release}
-Provides:       %{name} = %{?epoch}:%{version}-%{release}
-Provides:       %{name}%{?_isa} = %{?epoch}:%{version}-%{release}
+%package libs
+Summary:    H.264 codec %{name} libraries
+Obsoletes:  %{name} < %{?epoch}:%{version}-%{release}
+Provides:   %{name} = %{?epoch}:%{version}-%{release}
+Provides:   %{name}%{?_isa} = %{?epoch}:%{version}-%{release}
 
-%description    libs
+%description libs
 The %{name}-devel package contains libraries and header files for developing
 applications that use %{name}. This package contains the shared libraries.
 
-%package        devel
-Summary:        Development files for %{name}
-Requires:       %{name}-libs%{?_isa} = %{?epoch}:%{version}-%{release}
+%package devel
+Summary:    Development files for %{name}
+Requires:   %{name}-libs%{?_isa} = %{?epoch}:%{version}-%{release}
 
-%description    devel
+%description devel
 The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
-%package     -n mozilla-%{name}
-Summary:        H.264 codec support for Mozilla browsers
-Requires:       %{name}-libs%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       mozilla-filesystem%{?_isa}
+%package -n mozilla-%{name}
+Summary:    H.264 codec support for Mozilla browsers
+Requires:   %{name}-libs%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:   mozilla-filesystem%{?_isa}
 
 %description -n mozilla-openh264
 The mozilla-openh264 package contains a H.264 codec plugin for Mozilla browsers.
@@ -59,6 +59,7 @@ sed -i \
     -e 's@SHAREDLIB_DIR=$(PREFIX)/lib@SHAREDLIB_DIR=%{_libdir}@g' \
     -e 's@LIBDIR_NAME=lib@LIBDIR_NAME=%{_lib}@g' \
     -e 's@CFLAGS_OPT=-O3@CFLAGS_OPT=%{optflags}@g' \
+    -e '/^CFLAGS_OPT=/i LDFLAGS=%{__global_ldflags}' \
     Makefile
 
 %build
@@ -88,19 +89,18 @@ MOZ_GMP_PATH="%{_libdir}/mozilla/plugins/gmp-gmpopenh264/system-installed"
 export MOZ_GMP_PATH
 EOF
 
-%post libs -p /sbin/ldconfig
-
-%postun libs -p /sbin/ldconfig
+%ldconfig_scriptlets libs
 
 %files libs
 %license LICENSE
 %doc README.md CONTRIBUTORS
-%{_libdir}/*.so.*
+%{_libdir}/lib%{name}.so.4
+%{_libdir}/lib%{name}.so.%{version}
 
 %files devel
 %{_includedir}/*
-%{_libdir}/*.so
-%{_libdir}/pkgconfig/*.pc
+%{_libdir}/lib%{name}.so
+%{_libdir}/pkgconfig/%{name}.pc
 
 %files -n mozilla-%{name}
 %{_sysconfdir}/profile.d/gmpopenh264.sh
@@ -111,6 +111,9 @@ EOF
 %{_libdir}/mozilla/plugins/gmp-gmpopenh264/
 
 %changelog
+* Tue Feb 26 2019 Simone Caronni <negativo17@gmail.com> - 1:1.8.0-1
+- Update to 1.8.0.
+
 * Thu Sep 20 2018 Simone Caronni <negativo17@gmail.com> - 1:1.7.0-2
 - Add GCC build requirement.
 
