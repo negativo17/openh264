@@ -16,7 +16,6 @@ Source0:        https://github.com/cisco/%{name}/archive/v%{version}.tar.gz#/%{n
 Source1:        https://github.com/mozilla/gmp-api/archive/%{commit1}/gmp-api-%{shortcommit1}.tar.gz
 
 BuildRequires:  gcc-c++
-BuildRequires:  git
 BuildRequires:  nasm
 
 %description
