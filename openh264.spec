@@ -1,11 +1,11 @@
 # As defined in the Makefile (make gmp-bootstrap):
-# https://github.com/cisco/openh264/blob/master/Makefile#L174-L176
-# https://github.com/cisco/openh264/blob/master/Makefile#L32
+# https://github.com/cisco/openh264/blob/master/Makefile#L176-L178
+# https://github.com/cisco/openh264/blob/master/Makefile#L33
 %global commit1 c5f1d0f3213178818cbfb3e16f31d07328980560
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
 Name:           openh264
-Version:        2.1.1
+Version:        2.2.0
 Release:        1%{?dist}
 Epoch:          1
 Summary:        Open Source H.264 Codec
@@ -16,6 +16,7 @@ Source0:        https://github.com/cisco/%{name}/archive/v%{version}.tar.gz#/%{n
 Source1:        https://github.com/mozilla/gmp-api/archive/%{commit1}/gmp-api-%{shortcommit1}.tar.gz
 
 BuildRequires:  gcc-c++
+BuildRequires:  git
 BuildRequires:  nasm
 
 %description
@@ -112,6 +113,9 @@ EOF
 %{_libdir}/mozilla/plugins/gmp-gmpopenh264/
 
 %changelog
+* Wed Mar 16 2022 Simone Caronni <negativo17@gmail.com> - 1:2.2.0-1
+- Update to 2.2.0.
+
 * Sat May 23 2020 Simone Caronni <negativo17@gmail.com> - 1:2.1.1-1
 - Update to 2.1.1.
 - Update SPEC file.
