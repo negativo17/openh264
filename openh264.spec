@@ -6,7 +6,7 @@
 
 Name:           openh264
 Version:        2.2.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Epoch:          1
 Summary:        Open Source H.264 Codec
 License:        BSD
@@ -55,15 +55,14 @@ The mozilla-openh264 package contains a H.264 codec plugin for Mozilla browsers.
 tar -xf %{S:1}
 mv gmp-api-%{commit1} gmp-api
 
-sed -i \
-    -e 's@PREFIX=/usr/local@PREFIX=%{_prefix}@g' \
-    -e 's@SHAREDLIB_DIR=$(PREFIX)/lib@SHAREDLIB_DIR=%{_libdir}@g' \
-    -e 's@LIBDIR_NAME=lib@LIBDIR_NAME=%{_lib}@g' \
-    -e 's@CFLAGS_OPT=-O3@CFLAGS_OPT=%{optflags}@g' \
-    -e '/^CFLAGS_OPT=/i LDFLAGS=%{__global_ldflags}' \
-    Makefile
-
 %build
+sed -i \
+  -e 's@PREFIX=/usr/local@PREFIX=%{_prefix}@g' \
+  -e 's@SHAREDLIB_DIR=$(PREFIX)/lib@SHAREDLIB_DIR=%{_libdir}@g' \
+  -e 's@LIBDIR_NAME=lib@LIBDIR_NAME=%{_lib}@g' \
+  -e 's@CFLAGS_OPT=-O3@CFLAGS_OPT=%{optflags}@g' \
+  -e '/^CFLAGS_OPT=/i LDFLAGS=%{__global_ldflags}' \
+  Makefile
 %make_build
 %make_build plugin
 
@@ -112,6 +111,9 @@ EOF
 %{_libdir}/mozilla/plugins/gmp-gmpopenh264/
 
 %changelog
+* Sat Apr 02 2022 Simone Caronni <negativo17@gmail.com> - 1:2.2.0-2
+- Fix build on Fedora 36+.
+
 * Wed Mar 16 2022 Simone Caronni <negativo17@gmail.com> - 1:2.2.0-1
 - Update to 2.2.0.
 
