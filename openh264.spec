@@ -1,7 +1,4 @@
-# As defined in the Makefile (make gmp-bootstrap):
-# https://github.com/cisco/openh264/blob/master/Makefile#L176-L178
-# https://github.com/cisco/openh264/blob/master/Makefile#L33
-%global commit1 c5f1d0f3213178818cbfb3e16f31d07328980560
+%global commit1 3a01c086d1b0394238ff1b5ad22e76022830625a
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
 Name:           openh264
@@ -113,6 +110,7 @@ EOF
 %changelog
 * Sat Apr 02 2022 Simone Caronni <negativo17@gmail.com> - 1:2.2.0-2
 - Fix build on Fedora 36+.
+- Update gmp-api snapshot.
 
 * Wed Mar 16 2022 Simone Caronni <negativo17@gmail.com> - 1:2.2.0-1
 - Update to 2.2.0.
