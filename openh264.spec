@@ -1,18 +1,27 @@
-%global commit1 3a01c086d1b0394238ff1b5ad22e76022830625a
+# To get the commit:
+# git clone https://github.com/cisco/openh264.git
+# cd openh264
+# rm -rf gmp-api; make gmp-bootstrap; cd gmp-api
+# git rev-parse HEAD
+%global commit1 c5f1d0f3213178818cbfb3e16f31d07328980560
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
+# Makefile expects V=Yes instead of V=1:
+%global _make_verbose V=Yes
+
 Name:           openh264
-Version:        2.2.0
-Release:        2%{?dist}
+Version:        2.3.0
+Release:        1%{?dist}
 Epoch:          1
 Summary:        Open Source H.264 Codec
 License:        BSD
-URL:            http://www.openh264.org/
+URL:            https://www.openh264.org/
 
 Source0:        https://github.com/cisco/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        https://github.com/mozilla/gmp-api/archive/%{commit1}/gmp-api-%{shortcommit1}.tar.gz
 
 BuildRequires:  gcc-c++
+BuildRequires:  make
 BuildRequires:  nasm
 
 %description
@@ -108,6 +117,9 @@ EOF
 %{_libdir}/mozilla/plugins/gmp-gmpopenh264/
 
 %changelog
+* Wed Aug 10 2022 Simone Caronni <negativo17@gmail.com> - 1:2.3.0-1
+- Update to 2.3.0.
+
 * Sat Apr 02 2022 Simone Caronni <negativo17@gmail.com> - 1:2.2.0-2
 - Fix build on Fedora 36+.
 - Update gmp-api snapshot.
