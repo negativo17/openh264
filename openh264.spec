@@ -10,7 +10,7 @@
 %global _make_verbose V=Yes
 
 Name:           openh264
-Version:        2.3.0
+Version:        2.3.1
 Release:        1%{?dist}
 Epoch:          1
 Summary:        Open Source H.264 Codec
@@ -117,6 +117,9 @@ EOF
 %{_libdir}/mozilla/plugins/gmp-gmpopenh264/
 
 %changelog
+* Thu Sep 22 2022 Simone Caronni <negativo17@gmail.com> - 1:2.3.1-1
+- Update to 2.3.1.
+
 * Wed Aug 10 2022 Simone Caronni <negativo17@gmail.com> - 1:2.3.0-1
 - Update to 2.3.0.
 
