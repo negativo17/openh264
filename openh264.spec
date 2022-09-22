@@ -100,7 +100,7 @@ EOF
 %files libs
 %license LICENSE
 %doc README.md CONTRIBUTORS
-%{_libdir}/lib%{name}.so.6
+%{_libdir}/lib%{name}.so.7
 %{_libdir}/lib%{name}.so.%{version}
 
 %files devel
