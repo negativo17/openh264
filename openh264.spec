@@ -3,14 +3,14 @@
 # cd openh264
 # rm -rf gmp-api; make gmp-bootstrap; cd gmp-api
 # git rev-parse HEAD
-%global commit1 c5f1d0f3213178818cbfb3e16f31d07328980560
+%global commit1 e7d30b921df736a1121a0c8e0cf3ab1ce5b8a4b7
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
 # Makefile expects V=Yes instead of V=1:
 %global _make_verbose V=Yes
 
 Name:           openh264
-Version:        2.3.1
+Version:        2.4.0
 Release:        1%{?dist}
 Epoch:          1
 Summary:        Open Source H.264 Codec
@@ -117,6 +117,9 @@ EOF
 %{_libdir}/mozilla/plugins/gmp-gmpopenh264/
 
 %changelog
+* Sun Nov 26 2023 Simone Caronni <negativo17@gmail.com> - 1:2.4.0-1
+- Update to 2.4.0.
+
 * Thu Sep 22 2022 Simone Caronni <negativo17@gmail.com> - 1:2.3.1-1
 - Update to 2.3.1.
 
