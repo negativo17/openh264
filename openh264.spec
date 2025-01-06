@@ -11,7 +11,7 @@
 
 Name:           openh264
 Version:        2.5.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Epoch:          1
 Summary:        Open Source H.264 Codec
 License:        BSD
@@ -24,23 +24,19 @@ BuildRequires:  gcc-c++
 BuildRequires:  make
 BuildRequires:  nasm
 
+Obsoletes:  noopenh264 < 1:0
+Obsoletes:  %{name}-libs < %{?epoch}:%{version}-%{release}
+Provides:   %{name}-libs = %{?epoch}:%{version}-%{release}
+Provides:   %{name}-libs%{?_isa} = %{?epoch}:%{version}-%{release}
+
 %description
 OpenH264 is a codec library which supports H.264 encoding and decoding. It is
 suitable for use in real time applications such as WebRTC.
 
-%package libs
-Summary:    H.264 codec %{name} libraries
-Obsoletes:  %{name} < %{?epoch}:%{version}-%{release}
-Provides:   %{name} = %{?epoch}:%{version}-%{release}
-Provides:   %{name}%{?_isa} = %{?epoch}:%{version}-%{release}
-
-%description libs
-The %{name}-devel package contains libraries and header files for developing
-applications that use %{name}. This package contains the shared libraries.
-
 %package devel
 Summary:    Development files for %{name}
-Requires:   %{name}-libs%{?_isa} = %{?epoch}:%{version}-%{release}
+Obsoletes:  noopenh264-devel < 1:0
+Requires:   %{name}%{?_isa} = %{?epoch}:%{version}-%{release}
 
 %description devel
 The %{name}-devel package contains libraries and header files for
@@ -48,7 +44,7 @@ developing applications that use %{name}.
 
 %package -n mozilla-%{name}
 Summary:    H.264 codec support for Mozilla browsers
-Requires:   %{name}-libs%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:   %{name}%{?_isa} = %{?epoch}:%{version}-%{release}
 Requires:   mozilla-filesystem%{?_isa}
 
 %description -n mozilla-openh264
@@ -95,9 +91,7 @@ MOZ_GMP_PATH="%{_libdir}/mozilla/plugins/gmp-gmpopenh264/system-installed"
 export MOZ_GMP_PATH
 EOF
 
-%ldconfig_scriptlets libs
-
-%files libs
+%files
 %license LICENSE
 %doc README.md CONTRIBUTORS
 %{_libdir}/lib%{name}.so.7
@@ -117,6 +111,11 @@ EOF
 %{_libdir}/mozilla/plugins/gmp-gmpopenh264/
 
 %changelog
+* Mon Jan 06 2025 Simone Caronni <negativo17@gmail.com> - 1:2.5.0-2
+- Rename openh264-libs package to openh264, like in Fedora.
+- Obsolete nopenh264.
+- Trim changelog.
+
 * Sat Nov 09 2024 Simone Caronni <negativo17@gmail.com> - 1:2.5.0-1
 - Update to version 2.5.0.
 
@@ -125,49 +124,3 @@ EOF
 
 * Sun Nov 26 2023 Simone Caronni <negativo17@gmail.com> - 1:2.4.0-1
 - Update to 2.4.0.
-
-* Thu Sep 22 2022 Simone Caronni <negativo17@gmail.com> - 1:2.3.1-1
-- Update to 2.3.1.
-
-* Wed Aug 10 2022 Simone Caronni <negativo17@gmail.com> - 1:2.3.0-1
-- Update to 2.3.0.
-
-* Sat Apr 02 2022 Simone Caronni <negativo17@gmail.com> - 1:2.2.0-2
-- Fix build on Fedora 36+.
-- Update gmp-api snapshot.
-
-* Wed Mar 16 2022 Simone Caronni <negativo17@gmail.com> - 1:2.2.0-1
-- Update to 2.2.0.
-
-* Sat May 23 2020 Simone Caronni <negativo17@gmail.com> - 1:2.1.1-1
-- Update to 2.1.1.
-- Update SPEC file.
-
-* Sat Jul 06 2019 Simone Caronni <negativo17@gmail.com> - 1:2.0.0-1
-- Update to 2.0.0.
-
-* Tue Feb 26 2019 Simone Caronni <negativo17@gmail.com> - 1:1.8.0-1
-- Update to 1.8.0.
-
-* Thu Sep 20 2018 Simone Caronni <negativo17@gmail.com> - 1:1.7.0-2
-- Add GCC build requirement.
-
-* Tue Oct 24 2017 Simone Caronni <negativo17@gmail.com> - 1:1.7.0-1
-- Update to version 1.7.0.
-
-* Fri Nov 25 2016 Simone Caronni <negativo17@gmail.com> - 1:1.6.0-2
-- Automatically enable the OpenH264 plugin.
-
-* Wed Nov 09 2016 Simone Caronni <negativo17@gmail.com> - 1:1.6.0-1
-- Update to 1.6.0 official release.
-
-* Fri Aug 05 2016 Simone Caronni <negativo17@gmail.com> - 1:1.5.3-1
-- Update to 1.5.3 branch.
-- Obsoletes main package from the OpenH264 repository (prep for 1.6):
-  https://fedoraproject.org/wiki/OpenH264
-
-* Tue Apr 19 2016 Simone Caronni <negativo17@gmail.com> - 1.5.0-2
-- Fix source URL.
-
-* Fri Nov 20 2015 Simone Caronni <negativo17@gmail.com> - 1.5.0-1
-- First build.
