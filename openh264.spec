@@ -10,14 +10,14 @@
 %global _make_verbose V=Yes
 
 Name:           openh264
-Version:        2.5.0
-Release:        2%{?dist}
+Version:        2.5.1
+Release:        1%{?dist}
 Epoch:          1
 Summary:        Open Source H.264 Codec
 License:        BSD
 URL:            https://www.openh264.org/
 
-Source0:        https://github.com/cisco/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0:        https://github.com/cisco/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        https://github.com/mozilla/gmp-api/archive/%{commit1}/gmp-api-%{shortcommit1}.tar.gz
 
 BuildRequires:  gcc-c++
@@ -51,7 +51,7 @@ Requires:   mozilla-filesystem%{?_isa}
 The mozilla-openh264 package contains a H.264 codec plugin for Mozilla browsers.
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup
 
 # Extract gmp-api archive
 tar -xf %{S:1}
@@ -111,6 +111,9 @@ EOF
 %{_libdir}/mozilla/plugins/gmp-gmpopenh264/
 
 %changelog
+* Fri Mar 14 2025 Simone Caronni <negativo17@gmail.com> - 1:2.5.1-1
+- Update to version 2.5.1.
+
 * Mon Jan 06 2025 Simone Caronni <negativo17@gmail.com> - 1:2.5.0-2
 - Rename openh264-libs package to openh264, like in Fedora.
 - Obsolete nopenh264.
