@@ -9,6 +9,11 @@
 # Makefile expects V=Yes instead of V=1:
 %global _make_verbose V=Yes
 
+%ifarch %{ix86}
+%global _pkg_extra_ldflags "-Wl,-z,notext"
+%endif
+
+
 Name:           openh264
 Version:        2.6.0
 Release:        1%{?dist}
@@ -58,6 +63,7 @@ tar -xf %{S:1}
 mv gmp-api-%{commit1} gmp-api
 
 %build
+
 sed -i \
   -e 's@PREFIX=/usr/local@PREFIX=%{_prefix}@g' \
   -e 's@SHAREDLIB_DIR=$(PREFIX)/lib@SHAREDLIB_DIR=%{_libdir}@g' \
@@ -65,6 +71,7 @@ sed -i \
   -e 's@CFLAGS_OPT=-O3@CFLAGS_OPT=%{optflags}@g' \
   -e '/^CFLAGS_OPT=/i LDFLAGS=%{__global_ldflags}' \
   Makefile
+
 %make_build
 %make_build plugin
 
